@@ -4,7 +4,11 @@
     "target": "es5",
     "noImplicitAny": false,
     "outDir": "lib",
-    "rootDir": ".",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "rootDir": "src",
     "sourceMap": true
   },
   "include": [
