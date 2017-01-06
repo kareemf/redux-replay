@@ -1,7 +1,7 @@
 {
   "name": "redux-replay",
-  "version": "1.0.0",
-  "description": "A browser CLI for persisting, retrieving, and replaying redux actions\"",
+  "version": "0.1.0",
+  "description": "A browser CLI for persisting, retrieving, and replaying redux actions",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
