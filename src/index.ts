@@ -30,7 +30,7 @@ const createReplayer = (rootOpts) => {
 
     // play immediately if info required to quantize is not available
     if (!nextLogEntry || !logEntry.started || !nextLogEntry.started) {
-      replayAction(replayedAction, opts);
+      replayAction(replayedAction);
       return;
     }
 
@@ -38,7 +38,7 @@ const createReplayer = (rootOpts) => {
     const timeDiff = (nextLogEntry.started - logEntry.started) / playbackSpeed;
 
     setTimeout(() => {
-      replayAction(replayedAction, opts);
+      replayAction(replayedAction);
       replayLogEntries(logEntries, opts, index + 1);
     }, timeDiff);
   };
