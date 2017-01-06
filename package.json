@@ -1,0 +1,16 @@
+{
+  "name": "redux-replay",
+  "version": "1.0.0",
+  "description": "A browser CLI for persisting, retrieving, and replaying redux actions\"",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kareem Francis <francis.kareem@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "tslint": "^4.2.0",
+    "typescript": "^2.1.4",
+    "typings": "^2.1.0"
+  }
+}
