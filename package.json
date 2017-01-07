@@ -5,17 +5,17 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc",
-    "watch": "tsc -w",
-    "lint": "tslint 'src/*.ts*'"
+    "compile": "node_modules/typescript/bin/tsc",
+    "watch": "npm run compile -- -w",
+    "lint": "node_modules/typescript/bin/tsc 'src/*.ts*'"
   },
   "author": "Kareem Francis <francis.kareem@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@types/es6-promise": "0.0.32",
     "@types/isomorphic-fetch": "0.0.31",
     "es6-promises": "^1.0.10",
     "isomorphic-fetch": "^2.2.1",
+    "redux": "^3.6.0",
     "tslint": "^4.2.0",
     "typescript": "^2.1.4"
   }
