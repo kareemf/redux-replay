@@ -1,5 +1,5 @@
 import { Store, Action } from 'redux';
-
+import { Thenable } from 'firebase';
 export { Store, Action }
 
 export interface ReplayerConfig {
@@ -17,7 +17,7 @@ export interface ReplayOptions {
 export interface LogEntry {
   action: Action,
   nextState: any,
-  // started: Date, // can't use b/c of compilation error with subtraction  
+  // TODO/FUTURE: started: Date, // can't use b/c of compilation error with subtraction  
   started: any,
   took?: number,
   [propName: string]: any;
@@ -25,4 +25,9 @@ export interface LogEntry {
 
 export interface LogRetreaverFunc {
   (opts?: any): Promise<LogEntry[]>;
+}
+
+export interface LogPersisterFunc {
+  // TODO: convert to Promise?
+  (logEntries: LogEntry[]): Thenable<any>;
 }
