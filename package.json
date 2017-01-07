@@ -5,8 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run compile:watch",
     "compile": "node_modules/typescript/bin/tsc",
-    "watch": "npm run compile -- -w",
+    "compile:watch": "npm run compile -- -w",
     "lint": "node_modules/typescript/bin/tsc 'src/*.ts*'"
   },
   "author": "Kareem Francis <francis.kareem@gmail.com>",
