@@ -12,8 +12,11 @@
   "author": "Kareem Francis <francis.kareem@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@types/es6-promise": "0.0.32",
+    "@types/isomorphic-fetch": "0.0.31",
+    "es6-promises": "^1.0.10",
+    "isomorphic-fetch": "^2.2.1",
     "tslint": "^4.2.0",
-    "typescript": "^2.1.4",
-    "typings": "^2.1.0"
+    "typescript": "^2.1.4"
   }
 }
