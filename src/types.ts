@@ -31,3 +31,8 @@ export interface LogPersisterFunc {
   // TODO: convert to Promise?
   (logEntries: LogEntry[]): Thenable<any>;
 }
+
+export interface TransportConfig {
+  appId: string,
+  sessionId: string,
+}
