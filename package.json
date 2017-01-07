@@ -14,6 +14,7 @@
   "dependencies": {
     "@types/isomorphic-fetch": "0.0.31",
     "es6-promises": "^1.0.10",
+    "firebase": "^3.6.4",
     "isomorphic-fetch": "^2.2.1",
     "redux": "^3.6.0",
     "tslint": "^4.2.0",

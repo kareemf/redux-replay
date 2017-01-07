@@ -1,8 +1,8 @@
-import addTrackingToItems from './common';
+import { addTrackingToItems } from './common';
 
 const createTransport = (opts) => {
   const {
-    SERVICE_URL,
+    serviceUrl,
     appId,
     sessionId
   } = opts;
@@ -11,7 +11,7 @@ const createTransport = (opts) => {
     const logQueueWithTracking = addTrackingToItems(logQueue, appId, sessionId);
     
     // TODO: accept config
-    return fetch(SERVICE_URL, {
+    return fetch(serviceUrl, {
       method: `POST`,
       headers: {
         'Content-Type': `application/json`,
@@ -22,11 +22,7 @@ const createTransport = (opts) => {
 
   // TODO: accept config
   const logRetreaver = (opts = {}) => {
-    const {
-      sessionId = sessionId,
-    } = opts;
-
-    return fetch(`${SERVICE_URL}?sessionId=${sessionId}`, {
+    return fetch(`${serviceUrl}?sessionId=${sessionId}`, {
       headers: {
         'Content-Type': `application/json`,
       },

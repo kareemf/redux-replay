@@ -1,14 +1,23 @@
-import addTrackingToItems from './common';
+import firebase from 'firebase';
+import { addTrackingToItems } from './common';
+import { LogEntry, LogRetreaverFunc } from '../types';
+
+interface FirebaseTransportConfig {
+    dbRef: firebase.database.Reference,
+    path: string,
+    appId: string,
+    sessionId: string
+}
 
 const createTransport = (opts) => {
   const {
     dbRef,
-    childKey,
+    path,
     appId,
     sessionId
   } = opts;
   
-  const logRetreaver = () => {
+  const logRetreaver: LogRetreaverFunc = () => {
     if (!dbRef) {
       return Promise.reject(`No Firebase DB ref availale`);
     }
@@ -21,8 +30,8 @@ const createTransport = (opts) => {
         const val = snapshot.val();
 
         // each `push` transaction has its own key - flatten into a single array
-        const logEntries = Object
-          .values(val[childKey])
+        const logEntries: LogEntry[] = Object
+          .values(val[path])
           .reduce((ouput, entries) => ([...ouput, ...entries]), []);
 
         return logEntries;
@@ -37,7 +46,7 @@ const createTransport = (opts) => {
     const logQueueWithTracking = addTrackingToItems(logQueue, appId, sessionId);
 
     return dbRef
-      .child(childKey)
+      .child(path)
       .push(logQueueWithTracking)
       .then();
   };

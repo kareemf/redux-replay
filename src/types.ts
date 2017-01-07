@@ -6,7 +6,7 @@ export interface ReplayerConfig {
     store: Store<any>,
     stateResetAction: Action,
     renderApp(): any,
-    logRetreaver(opts: ReplayOptions): Promise<any>;
+    logRetreaver(opts?: any): Promise<LogEntry[]>;
 }
 
 export interface ReplayOptions {
@@ -21,4 +21,8 @@ export interface LogEntry {
   started: any,
   took?: number,
   [propName: string]: any;
+}
+
+export interface LogRetreaverFunc {
+  (opts?: any): Promise<LogEntry[]>;
 }
