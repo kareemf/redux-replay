@@ -8,7 +8,8 @@
     "start": "npm run compile:watch",
     "compile": "node_modules/typescript/bin/tsc",
     "compile:watch": "npm run compile -- -w",
-    "lint": "node_modules/typescript/bin/tsc 'src/*.ts*'"
+    "lint": "node_modules/tslint/bin/tslint 'src/**/*.ts*'",
+    "lint:fix": "npm run lint -- --fix"
   },
   "author": "Kareem Francis <francis.kareem@gmail.com>",
   "license": "ISC",
