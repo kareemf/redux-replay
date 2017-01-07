@@ -1,2 +1,2 @@
-export * from './firebaseTransport';
-export * from './httpTransport';
+export { default as createFirebaseTransport } from './firebaseTransport';
+export { default as createHttpTransport } from './httpTransport';

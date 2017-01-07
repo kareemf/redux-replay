@@ -14,7 +14,7 @@ const createTransport = (opts: FirebaseTransportConfig) => {
     appId,
     sessionId
   } = opts;
-  
+
   const logRetreaver: LogPersisterFunc = () => {
     if (!dbRef) {
       return Promise.reject(`No Firebase DB ref availale`);
@@ -51,4 +51,3 @@ const createTransport = (opts: FirebaseTransportConfig) => {
 };
 
 export default createTransport;
-  
