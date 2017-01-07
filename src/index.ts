@@ -1,22 +1,24 @@
-// replaySession()
-// replaySession({playbackSpeed: 2})
-// replaySession({sessionId:"2513f0a8-8292-4f01-8bd4-7d678b4ebaea"})
-// replaySession({sessionId:"2513f0a8-8292-4f01-8bd4-7d678b4ebaea", playbackSpeed: 2})
+import {
+  ReplayerConfig,
+  ReplayOptions,
+  Action,
+  LogEntry
+} from './types';
 
-const createReplayer = (rootOpts) => {
+const createReplayer = (config: ReplayerConfig) => {
   const {
     store,
     renderApp,
     stateResetAction,
     logRetreaver,
-  } = rootOpts;
+  } = config;
 
-  const replayAction = action => {
+  const replayAction = (action : Action) => {
     store.dispatch(action);
     renderApp();
   };
 
-  const replayLogEntries = (logEntries, opts = {}, index = 0) => {
+  const replayLogEntries = (logEntries: LogEntry[], opts: ReplayOptions = {}, index = 0) => {
     const logEntry = logEntries[index];
 
     if (!logEntry) { return; }
@@ -43,7 +45,7 @@ const createReplayer = (rootOpts) => {
     }, timeDiff);
   };
 
-  const replaySession = (opts) => {
+  const replaySession = (opts: ReplayOptions) => {
     const { dispatch } = store;
 
     logRetreaver(opts).then((logEntries) => {
