@@ -3,9 +3,9 @@ import { Thenable } from 'firebase';
 export { Store, Action }
 
 export interface ReplayerConfig {
-    store: Store<any>,
-    stateResetAction: Action,
-    renderApp(): any,
+    store: Store<any>;
+    stateResetAction: Action;
+    renderApp(): any;
     logRetreaver(opts?: any): Promise<LogEntry[]>;
 }
 
@@ -15,11 +15,11 @@ export interface ReplayOptions {
 }
 
 export interface LogEntry {
-  action: Action,
-  nextState: any,
+  action: Action;
+  nextState: any;
   // TODO/FUTURE: started: Date, // can't use b/c of compilation error with subtraction  
-  started: any,
-  took?: number,
+  started: any;
+  took?: number;
   [propName: string]: any;
 }
 
@@ -33,6 +33,6 @@ export interface LogPersisterFunc {
 }
 
 export interface TransportConfig {
-  appId: string,
-  sessionId: string,
+  appId: string;
+  sessionId: string;
 }

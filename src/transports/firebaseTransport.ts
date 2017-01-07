@@ -3,8 +3,8 @@ import { addTrackingToItems } from './common';
 import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig } from '../types';
 
 interface FirebaseTransportConfig extends TransportConfig {
-    dbRef: database.Reference,
-    path: string,
+    dbRef: database.Reference;
+    path: string;
 }
 
 const createTransport = (opts: FirebaseTransportConfig) => {
@@ -48,7 +48,7 @@ const createTransport = (opts: FirebaseTransportConfig) => {
       .push(logEntriesWithTracking)
       .then();
   };
-}
+};
 
 export default createTransport;
   

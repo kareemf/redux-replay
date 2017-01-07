@@ -3,7 +3,7 @@ import { addTrackingToItems } from './common';
 import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig } from '../types';
 
 interface HttpTransportConfig extends TransportConfig {
-  serviceUrl: string,
+  serviceUrl: string;
 }
 
 const createTransport = (opts: HttpTransportConfig) => {
@@ -34,6 +34,6 @@ const createTransport = (opts: HttpTransportConfig) => {
       },
     }).then(resp => resp.json());
   };
-}
+};
 
 export default createTransport;
