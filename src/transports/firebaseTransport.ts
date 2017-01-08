@@ -18,6 +18,7 @@ const createTransport = (opts: FirebaseTransportConfig) => {
     appId,
     sessionId
   } = opts;
+
   const logRetreaver: LogRetreaverFunc = (opts: FirebaseLogRetreaverOptions = {}) => {
     const {  sessionId: targetSessionId } = opts;
 
