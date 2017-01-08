@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 import { addTrackingToItems } from './common';
-import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig } from '../types';
+import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig, Transport } from '../types';
 
 interface HttpTransportConfig extends TransportConfig {
   serviceUrl: string;
@@ -15,7 +15,7 @@ const createTransport = (opts: HttpTransportConfig) => {
 
   const logPersister: LogPersisterFunc = (logQueue: LogEntry[]) => {
     const logQueueWithTracking = addTrackingToItems(logQueue, appId, sessionId);
-    
+
     // TODO: accept config
     return fetch(serviceUrl, {
       method: `POST`,
@@ -27,13 +27,24 @@ const createTransport = (opts: HttpTransportConfig) => {
   };
 
   // TODO: accept config
-  const logRetreaver: LogPersisterFunc = () => {
+  const logRetreaver: LogRetreaverFunc = () => {
     return fetch(`${serviceUrl}?sessionId=${sessionId}`, {
       headers: {
         'Content-Type': `application/json`,
       },
-    }).then(resp => resp.json());
+    }).then(resp => {
+      const promise = new Promise<LogEntry[]>((resolve, reject) => {
+        resp.json().then(resolve, reject);
+      });
+
+      return promise;
+    });
   };
+
+  return {
+    logPersister,
+    logRetreaver
+  } as Transport;
 };
 
 export default createTransport;

@@ -1,6 +1,6 @@
 import { database } from 'firebase';
 import { addTrackingToItems } from './common';
-import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig } from '../types';
+import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig, Transport } from '../types';
 
 interface FirebaseTransportConfig extends TransportConfig {
     dbRef: database.Reference;
@@ -15,7 +15,7 @@ const createTransport = (opts: FirebaseTransportConfig) => {
     sessionId
   } = opts;
 
-  const logRetreaver: LogPersisterFunc = () => {
+  const logRetreaver: LogRetreaverFunc = () => {
     if (!dbRef) {
       return Promise.reject(`No Firebase DB ref availale`);
     }
@@ -48,6 +48,11 @@ const createTransport = (opts: FirebaseTransportConfig) => {
       .push(logEntriesWithTracking)
       .then();
   };
+
+  return {
+    logPersister,
+    logRetreaver
+  } as Transport;
 };
 
 export default createTransport;

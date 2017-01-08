@@ -17,7 +17,7 @@ export interface ReplayOptions {
 export interface LogEntry {
   action: Action;
   nextState: any;
-  // TODO/FUTURE: started: Date, // can't use b/c of compilation error with subtraction  
+  // TODO/FUTURE: started: Date, // can't use b/c of compilation error with subtraction
   started: any;
   took?: number;
   [propName: string]: any;
@@ -35,4 +35,9 @@ export interface LogPersisterFunc {
 export interface TransportConfig {
   appId: string;
   sessionId: string;
+}
+
+export interface Transport {
+  logPersister: LogPersisterFunc;
+  logRetreaver: LogRetreaverFunc;
 }
