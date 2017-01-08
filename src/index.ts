@@ -61,3 +61,4 @@ const createReplayer = (config: ReplayerConfig) => {
 };
 
 export default createReplayer;
+export  * from './transports';
