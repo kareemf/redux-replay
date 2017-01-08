@@ -7,6 +7,10 @@ interface FirebaseTransportConfig extends TransportConfig {
     path: string;
 }
 
+interface FirebaseLogRetreaverOptions {
+  sessionId?: string;
+}
+
 const createTransport = (opts: FirebaseTransportConfig) => {
   const {
     dbRef,
@@ -14,22 +18,25 @@ const createTransport = (opts: FirebaseTransportConfig) => {
     appId,
     sessionId
   } = opts;
+  const logRetreaver: LogRetreaverFunc = (opts: FirebaseLogRetreaverOptions = {}) => {
+    const {  sessionId: targetSessionId } = opts;
 
-  const logRetreaver: LogRetreaverFunc = () => {
     if (!dbRef) {
       return Promise.reject(`No Firebase DB ref availale`);
     }
 
     return dbRef
+      .child(path)
+      .orderByChild("sessionId")
+      .equalTo(targetSessionId || sessionId)
       .once('value')
       .then((snapshot) => {
-        // console.log('snapshot', snapshot);
-        // window.snapshot = snapshot;
         const val = snapshot.val();
 
+        if (!val) { return []; }
         // each `push` transaction has its own key - flatten into a single array
         const logEntries: LogEntry[] = Object
-          .values(val[path])
+          .values(val)
           .reduce((ouput, entries) => ([...ouput, ...entries]), []);
 
         return logEntries;
@@ -42,11 +49,17 @@ const createTransport = (opts: FirebaseTransportConfig) => {
     }
 
     const logEntriesWithTracking = addTrackingToItems(logEntries, appId, sessionId);
+    const promises = [];
 
-    return dbRef
-      .child(path)
-      .push(logEntriesWithTracking)
-      .then();
+    logEntriesWithTracking.forEach(logEntry => {
+      const promise = dbRef
+        .child(path)
+        .push(logEntry)
+
+      promises.push(promise);
+    });
+
+    return Promise.all(promises);
   };
 
   return {
