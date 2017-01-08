@@ -2,7 +2,7 @@
   "name": "redux-replay",
   "version": "0.1.0",
   "description": "A browser CLI for persisting, retrieving, and replaying redux actions",
-  "main": "lib/index.js",
+  "main": "lib/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run compile:watch",
@@ -12,6 +12,10 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "author": "Kareem Francis <francis.kareem@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kareemf/redux-replay.git"
+  },
   "license": "ISC",
   "dependencies": {
     "@types/isomorphic-fetch": "0.0.31",
@@ -19,7 +23,9 @@
     "firebase": "^3.6.4",
     "isomorphic-fetch": "^2.2.1",
     "redux": "^3.6.0",
-    "tslint": "^4.2.0",
     "typescript": "^2.1.4"
+  },
+  "devDependencies": {
+    "tslint": "^4.2.0"
   }
 }
