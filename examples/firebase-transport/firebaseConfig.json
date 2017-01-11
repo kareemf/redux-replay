@@ -1,0 +1,7 @@
+{
+  "apiKey": "AIzaSyCzsSjOr_nvihKTqX43D27M-I3ARcZU-B0",
+  "authDomain": "redux-persistence-example.firebaseapp.com",
+  "databaseURL": "https://redux-persistence-example.firebaseio.com",
+  "storageBucket": "redux-persistence-example.appspot.com",
+  "messagingSenderId": "1038232463213"
+}

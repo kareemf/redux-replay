@@ -1,9 +1,9 @@
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 const path = `log-entries`;
 const firebaseRefKey = `/sessions`;
 
-const setupFirebase = (config) => {
+const authenticateWithFirebase = (config) => {
   const authPromise = new Promise((resolve, reject) => {
     firebase.initializeApp(config);
 
@@ -31,4 +31,4 @@ const setupFirebase = (config) => {
   return authPromise;
 };
 
-export default setupFirebase;
+export default authenticateWithFirebase;

@@ -8,14 +8,14 @@ import createReplayer, { createFirebaseTransport } from '../../../lib';
 
 import Counter from './components/Counter';
 import counter from './reducers';
-import setupFirebase from './setupFirebase';
+import authenticateWithFirebase from './authenticateWithFirebase';
 
 const LOGGING_APP_ID = `firebase-counter`;
 const LOGGING_SESSION_ID = uuid.v4();
 
 const firebaseConfig = require('../firebaseConfig.json');
 
-setupFirebase(firebaseConfig).then(({ ref, path }) => {
+authenticateWithFirebase(firebaseConfig).then(({ ref, path }) => {
   const { logPersister, logRetreaver } = createFirebaseTransport({
     ref,
     path,
