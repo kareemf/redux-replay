@@ -8,14 +8,14 @@ import {
 const createReplayer = (config: ReplayerConfig) => {
   const {
     store,
-    renderApp,
+    render,
     stateResetAction,
     logRetreaver,
   } = config;
 
   const replayAction = (action : Action) => {
     store.dispatch(action);
-    renderApp();
+    render();
   };
 
   const replayLogEntries = (logEntries: LogEntry[], opts: ReplayOptions = {}, index = 0) => {
@@ -36,8 +36,8 @@ const createReplayer = (config: ReplayerConfig) => {
       return;
     }
 
-    const { playbackSpeed = 1 } = opts;
-    const timeDiff = (nextLogEntry.started - logEntry.started) / playbackSpeed;
+    const { playSpeed = 1 } = opts;
+    const timeDiff = (nextLogEntry.started - logEntry.started) / playSpeed;
 
     setTimeout(() => {
       replayAction(replayedAction);
