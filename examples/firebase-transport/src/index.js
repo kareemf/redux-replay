@@ -1,29 +1,23 @@
 import uuid from 'uuid';
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
-import createReplayer, { createFirebaseTransport } from 'redux-replay';
+import createReplayer, { createFirebaseTransport } from '../../../lib';
 
-import Counter from './components/Counter'
-import counter from './reducers'
-import setupFirebase from './setupFirebase'
+import Counter from './components/Counter';
+import counter from './reducers';
+import setupFirebase from './setupFirebase';
 
-// TODO: read from config
 const LOGGING_APP_ID = `firebase-counter`;
 const LOGGING_SESSION_ID = uuid.v4();
 
-// TODO: read from config
-const firebaseConfig = require('firebaseConfig.json')
-
-// TODO:
-// dbRef -> ref
-// renderApp -> render
+const firebaseConfig = require('../firebaseConfig.json');
 
 setupFirebase(firebaseConfig).then(({ ref, path }) => {
   const { logPersister, logRetreaver } = createFirebaseTransport({
-    dbRef: ref,
+    ref,
     path,
     appId: LOGGING_APP_ID,
     sessionId: LOGGING_SESSION_ID,
@@ -32,7 +26,7 @@ setupFirebase(firebaseConfig).then(({ ref, path }) => {
   const logger = createLogger({
     // log all actions except replayed actions
     predicate: (getState, action) => !action.__replayed,
-    persister: logPersister
+    persister: logPersister,
   });
 
   const rootReducer = (state, action) => {
@@ -49,24 +43,32 @@ setupFirebase(firebaseConfig).then(({ ref, path }) => {
 
   const rootEl = document.getElementById('root')
 
-  const render = () => ReactDOM.render(
-    <Counter
-      value={store.getState()}
-      onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-      onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-    />,
-    rootEl
-  )
+  const render = () => {
+    ReactDOM.render(
+      <Counter
+        value={store.getState()}
+        onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+        onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+      />,
+      rootEl
+    );
+  };
 
   const stateResetAction = { type: `RESET_STATE` };
   const replaySession = createReplayer({
     store,
-    renderApp: render,
+    render,
     stateResetAction,
     logRetreaver,
   });
 
-  render()
-  store.subscribe(render)
-  window.replaySession = replaySession;
+  window.actionReplay = {
+    fetchSession: logRetreaver,
+    sessionId: LOGGING_SESSION_ID,
+    replaySession,
+  };
+
+  store.subscribe(render);
+
+  render();
 });
