@@ -4,6 +4,7 @@
 It is the responsiblity of the `logRetreaver` to limit access to data. If not properly implemented, it is possible that arbitrary users' sessions may be retrieved by providing a valid `sessionId`
 
 ### Goals
+- `replayedActionTransformer` - attach `__replayed` to replayed actions by default
 - test firebase transport
 - figure out peer/optional dependency management
 - update readme
