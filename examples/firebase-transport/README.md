@@ -2,6 +2,23 @@
 
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+## Getting Started
+
+### Install dependencies
+Run either `npm install` or `yarn`
+
+### Add `firebaseConfig.json`
+In order to run the application locally, a `firebaseConfig.json` file needs to exist in the project root (same level as `package.json`), ex
+```
+{
+  "apiKey": "<stuff>",
+  "authDomain": "<stuff>",
+  "databaseURL": "<stuff>",
+  "storageBucket": "<stuff>",
+  "messagingSenderId": "<stuff>3"
+}
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
