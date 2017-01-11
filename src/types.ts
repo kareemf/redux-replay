@@ -5,12 +5,12 @@ export { Store, Action }
 export interface ReplayerConfig {
     store: Store<any>;
     stateResetAction: Action;
-    renderApp(): any;
+    render(): any;
     logRetreaver(opts?: any): Promise<LogEntry[]>;
 }
 
 export interface ReplayOptions {
-  playbackSpeed?: number;
+  playSpeed?: number;
   sessionId?: string;
 }
 

@@ -1,10 +1,12 @@
 # redux-replay
 
+### Note about `LogRetreaverFunc`
+It is the responsiblity of the `logRetreaver` to limit access to data. If not properly implemented, it is possible that arbitrary users' sessions may be retrieved by providing a valid `sessionId`
+
 ### Goals
-- finish/test firebase transport
+- test firebase transport
 - figure out peer/optional dependency management
 - update readme
-- add firebase example
 - finish http transport
 - add example
 - replay progress indicator

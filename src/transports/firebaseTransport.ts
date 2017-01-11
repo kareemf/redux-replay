@@ -3,7 +3,7 @@ import { addTrackingToItems } from './common';
 import { LogEntry, LogRetreaverFunc, LogPersisterFunc, TransportConfig, Transport } from '../types';
 
 interface FirebaseTransportConfig extends TransportConfig {
-    dbRef: database.Reference;
+    ref: database.Reference;
     path: string;
 }
 
@@ -13,21 +13,22 @@ interface FirebaseLogRetreaverOptions {
 
 const createTransport = (opts: FirebaseTransportConfig) => {
   const {
-    dbRef,
+    ref,
     path,
     appId,
     sessionId
   } = opts;
+
   const logRetreaver: LogRetreaverFunc = (opts: FirebaseLogRetreaverOptions = {}) => {
     const {  sessionId: targetSessionId } = opts;
 
-    if (!dbRef) {
+    if (!ref) {
       return Promise.reject(`No Firebase DB ref availale`);
     }
 
-    return dbRef
+    return ref
       .child(path)
-      .orderByChild("sessionId")
+      .orderByChild('sessionId')
       .equalTo(targetSessionId || sessionId)
       .once('value')
       .then((snapshot) => {
@@ -44,7 +45,7 @@ const createTransport = (opts: FirebaseTransportConfig) => {
   };
 
   const logPersister: LogPersisterFunc = (logEntries: LogEntry[]) => {
-    if (!dbRef) {
+    if (!ref) {
       return Promise.reject(`No Firebase DB ref availale`);
     }
 
@@ -52,9 +53,9 @@ const createTransport = (opts: FirebaseTransportConfig) => {
     const promises = [];
 
     logEntriesWithTracking.forEach(logEntry => {
-      const promise = dbRef
+      const promise = ref
         .child(path)
-        .push(logEntry)
+        .push(logEntry);
 
       promises.push(promise);
     });
