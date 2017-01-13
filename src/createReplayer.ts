@@ -11,6 +11,10 @@ const createReplayer = (config: ReplayerConfig) => {
     render,
     stateResetAction,
     logRetreaver,
+    replayedActionTransformer = (action) => ({
+      ...action,
+      __replayed: true,
+    })
   } = config;
 
   const replayAction = (action : Action) => {
@@ -25,10 +29,7 @@ const createReplayer = (config: ReplayerConfig) => {
 
     const nextLogEntry = logEntries[index + 1];
     const { action } = logEntry;
-    const replayedAction = {
-      ...action,
-      __replayed: true,
-    };
+    const replayedAction = replayedActionTransformer(action);
 
     // play immediately if info required to quantize is not available
     if (!nextLogEntry || !logEntry.started || !nextLogEntry.started) {

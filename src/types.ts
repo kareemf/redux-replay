@@ -7,6 +7,7 @@ export interface ReplayerConfig {
     stateResetAction: Action;
     render(): any;
     logRetreaver(opts?: any): Promise<LogEntry[]>;
+    replayedActionTransformer(): Action;
 }
 
 export interface ReplayOptions {

@@ -9,7 +9,6 @@ It is the responsiblity of the `logRetreaver` to limit access to data. If not pr
 
 ### Goals
 - redux-logger: `persistencePredicate` - defaults to `predicate - allows entry to be logged without persisting, vice versa
-- `replayedActionTransformer` - attach `__replayed` to replayed actions by default
 - test firebase transport
 - figure out peer/optional dependency management
 - update readme
