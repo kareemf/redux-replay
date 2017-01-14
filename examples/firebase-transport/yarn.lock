@@ -4585,9 +4585,9 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "~0.1.0"
 
-"redux-logger@git+https://github.com/kareemf/redux-logger.git#a4e1a98":
+"redux-logger@git+https://github.com/kareemf/redux-logger.git#f599c8e":
   version "2.7.4"
-  resolved "git+https://github.com/kareemf/redux-logger.git#a4e1a98"
+  resolved "git+https://github.com/kareemf/redux-logger.git#f599c8e"
   dependencies:
     debounce "^1.0.0"
     deep-diff "0.3.4"
