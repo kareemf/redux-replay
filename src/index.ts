@@ -1,2 +1,4 @@
-export default './createReplayer';
+import createReplayer from './createReplayer';
+
+export default createReplayer;
 export  * from './transports';
