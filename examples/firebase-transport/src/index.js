@@ -24,8 +24,9 @@ authenticateWithFirebase(firebaseConfig).then(({ ref, path }) => {
   });
 
   const logger = createLogger({
-    // log all actions except replayed actions
-    predicate: (getState, action) => !action.__replayed,
+    // persist all actions except replayed ones
+    // `__replayed` is added to replayed actions by `createReplayer`'s default `actionTransformer`
+    persistencePredicate: (getState, action) => !action.__replayed,
     persister: logPersister,
   });
 
