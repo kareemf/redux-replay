@@ -18,14 +18,21 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@types/isomorphic-fetch": "0.0.31",
     "es6-promises": "^1.0.10",
-    "firebase": "^3.6.4",
-    "isomorphic-fetch": "^2.2.1",
     "redux": "^3.6.0",
-    "typescript": "^2.1.4"
+    "redux-logger": "git+https://github.com/kareemf/redux-logger.git#f599c8e"
   },
   "devDependencies": {
-    "tslint": "^4.2.0"
+    "@types/isomorphic-fetch": "0.0.31",
+    "tslint": "^4.2.0",
+    "typescript": "^2.1.4"
+  },
+  "peerDependencies": {
+    "redux": "^3.6.0",
+    "redux-logger": "git+https://github.com/kareemf/redux-logger.git#f599c8e"
+  },
+  "optionalDependencies": {
+    "firebase": "^3.6.4",
+    "isomorphic-fetch": "^2.2.1"
   }
 }
